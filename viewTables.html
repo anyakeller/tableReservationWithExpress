@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hot Restauruatntttt</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Restauaraarrrrttt thing</h1>
+        <h3>YEET</h3>
+        <hr />
+        <a href="/add"
+          ><button class="btn btn-danger btn-lg">
+            <span class="fa fa-plus"></span>Make Reservation
+          </button></a
+        >
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3><strong>Tables</strong></h3>
+        </div>
+        <div id="allTables" class="card-body">
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $.get('/resList', function(data) {
+        var allTables = $('#allTables');
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i]);
+          var tableCard = $('<div>');
+          tableCard.attr('class', 'card');
+          var head = $('<div>');
+          head.text('Table #'+ (i+1));
+          head.attr('class', 'card-header');
+          head.appendTo(tableCard);
+
+          var body = $('<div>');
+          body.attr('class', 'card-body');
+          body.append($('<p>').text('Name: ' + data[i].name));
+          body.append($('<p>').text('Email: ' + data[i].email));
+          body.append($('<p>').text('Phone: ' + data[i].phone));
+          body.append($('<p>').text('Unique ID: ' + data[i].uid));
+          body.appendTo(tableCard);
+
+          allTables.append(tableCard);
+        }
+      });
+    </script>
+  </body>
+</html>
